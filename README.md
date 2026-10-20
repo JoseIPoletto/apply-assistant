@@ -14,9 +14,16 @@ Opera/Chrome → extensiones → Modo desarrollador → **Cargar descomprimida**
 
 ## Actualizar
 
-Doble clic en `actualizar.bat` → en extensiones, ↻ en Apply Assistant → F5 en LinkedIn.
-Tus datos no se pierden: el manifiesto fija el ID de la extensión (`key`), así que el almacenamiento sobrevive a recargas y cambios de carpeta.
-La versión que corre se ve en la barrita (ej. `v0.2.0`).
+**Automático (recomendado):** doble clic una vez en `activar-actualizacion-automatica.bat`.
+Crea una tarea de Windows que hace `git pull` cada hora sin abrir ventanas. La extensión revisa
+su `manifest.json` cada 5 minutos y, si cambió la versión, se recarga sola. Si tenías LinkedIn
+abierto, la barrita te pide F5.
+
+**Manual:** doble clic en `actualizar.bat` → ↻ en la extensión → F5 en LinkedIn.
+
+Tus datos no se pierden: el manifiesto fija el ID de la extensión (`key`).
+La versión que corre se ve en la barrita (ej. `v0.3.0`). **Cada cambio publicado tiene que subir
+la versión en `public/manifest.json`**, si no la auto-recarga no se entera.
 
 `dist/` se versiona a propósito: así no hace falta Node en tu compu para usarla.
 

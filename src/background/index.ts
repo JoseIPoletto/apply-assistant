@@ -47,3 +47,29 @@ chrome.commands.onCommand.addListener(async (command) => {
   const [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
   if (tab?.id) chrome.tabs.sendMessage(tab.id, { type: 'fill' } satisfies Msg).catch(() => {});
 });
+
+// ───── auto-recarga ─────
+// Una extensión "descomprimida" no se actualiza sola. Una tarea de Windows hace
+// `git pull` en la carpeta; acá leemos el manifest.json del disco cada 5 min y,
+// si la versión cambió, reiniciamos la extensión para tomar los archivos nuevos.
+const SELF_UPDATE = 'aa-self-update';
+chrome.alarms.create(SELF_UPDATE, { periodInMinutes: 5 });
+
+async function reloadIfNewVersion(): Promise<void> {
+  try {
+    const res = await fetch(chrome.runtime.getURL('manifest.json'), { cache: 'no-store' });
+    const onDisk = (await res.json()) as { version?: string };
+    const running = chrome.runtime.getManifest().version;
+    if (onDisk.version && onDisk.version !== running) {
+      console.info(`[Apply Assistant] versión ${running} → ${onDisk.version}: recargando`);
+      chrome.runtime.reload();
+    }
+  } catch {
+    // manifest a medio escribir durante un git pull: se reintenta en la próxima alarma
+  }
+}
+
+chrome.alarms.onAlarm.addListener((a) => {
+  if (a.name === SELF_UPDATE) void reloadIfNewVersion();
+});
+chrome.runtime.onStartup.addListener(() => void reloadIfNewVersion());

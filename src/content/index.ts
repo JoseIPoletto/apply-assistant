@@ -160,6 +160,12 @@ async function main() {
     }
     running = true;
     try {
+      if (!chrome.runtime?.id) {
+        // La extensión se actualizó y este script quedó viejo: pedir recarga y no hacer nada más.
+        toolbar.show();
+        toolbar.setStatus('Apply Assistant se actualizó: recargá la página (F5).');
+        return;
+      }
       const roots = site.findRoots();
       if (roots.length !== (hadRoots ? 1 : 0)) log(roots.length ? `formulario detectado (${roots.length})` : 'sin formulario abierto');
       hadRoots = roots.length > 0;

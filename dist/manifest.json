@@ -2,10 +2,11 @@
   "manifest_version": 3,
   "name": "Apply Assistant (personal)",
   "description": "Completa formularios de postulación con tu perfil local. Nunca envía: el clic final es tuyo.",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "permissions": [
     "storage",
-    "unlimitedStorage"
+    "unlimitedStorage",
+    "alarms"
   ],
   "host_permissions": [
     "https://www.linkedin.com/*",
