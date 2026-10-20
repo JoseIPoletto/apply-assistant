@@ -1,0 +1,40 @@
+import type { Profile, Settings } from './types';
+
+export const DEFAULT_PROFILE: Profile = {
+  firstName: '',
+  lastName: '',
+  email: '',
+  phone: '',
+  phoneCountryCode: '+54',
+  city: '',
+  country: 'Argentina',
+  location: '',
+  linkedinUrl: '',
+  githubUrl: '',
+  portfolioUrl: '',
+  currentTitle: '',
+  headline: '',
+  summary: '',
+  coverLetter: '',
+  englishLevel: '',
+  noticePeriod: '',
+  noticeDays: null,
+  salary: [],
+  workModes: [],
+  willingToRelocate: null,
+  requiresSponsorship: null,
+  authorizedCountries: [],
+  totalYears: null,
+  techYears: {},
+  cvText: '',
+};
+
+export const DEFAULT_SETTINGS: Settings = {
+  claudeEnabled: false,
+  apiKey: '',
+  model: 'claude-sonnet-5-5',
+  autoFill: true,
+  uploadCvOnLinkedIn: false,
+  uploadCvExternal: true,
+  overwriteExisting: false,
+};

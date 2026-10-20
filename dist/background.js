@@ -1,0 +1,19 @@
+import{b as u,l as p,c as m}from"./chunks/storage-D7j_rP49.js";const l=(e,a)=>e.length>a?`${e.slice(0,a)}…`:e;function f(e){return[`Nombre: ${e.firstName} ${e.lastName}`,`Ubicación: ${e.location||[e.city,e.country].filter(Boolean).join(", ")}`,`Puesto actual: ${e.currentTitle}`,`Resumen: ${e.summary||"sin dato"}`,`Inglés: ${e.englishLevel||"sin dato"}`,`Disponibilidad: ${e.noticePeriod||"sin dato"}`,`Modalidades aceptadas: ${e.workModes.join(", ")||"sin dato"}`,`Relocación: ${e.willingToRelocate==null?"sin dato":e.willingToRelocate?"sí":"no"}`,`Necesita visa: ${e.requiresSponsorship==null?"sin dato":e.requiresSponsorship?"sí":"no"}`,`Autorizado a trabajar en: ${e.authorizedCountries.join(", ")||"sin dato"}`,`Años totales: ${e.totalYears??"sin dato"}`,`Años por tecnología: ${Object.entries(e.techYears).map(([o,n])=>`${o} ${n}`).join(", ")||"sin dato"}`,`Pretensión: ${e.salary.map(o=>`${o.currency} ${o.amount}/${o.period}`).join(" | ")||"sin dato"}`].join(`
+`)}const y=`Completás formularios de postulación laboral en nombre de un candidato.
+Reglas innegociables:
+- NUNCA inventes experiencia, títulos, empresas, números, fechas ni años. Si el dato no está en el perfil, el CV o las respuestas previas, devolvé answer: null.
+- Preguntas fácticas (sí/no, cantidades, certificaciones, permisos): respondé solo si se deduce sin dudas del material. Ante la duda, null.
+- Preguntas abiertas (por qué te interesa, contanos sobre vos, carta breve): redactá en primera persona, concreto, 60–120 palabras, en el idioma de la pregunta, apoyándote en la oferta y en hechos reales del CV. Sin frases de relleno ni elogios genéricos a la empresa.
+- Si el campo tiene opciones, "answer" debe ser el texto EXACTO de una opción (o una lista de opciones para casillas múltiples).
+- Respondé SOLO con JSON válido: {"answers":[{"key":"...","answer":"..." | ["..."] | null,"reason":"breve"}]}`;function $(e,a,o){const n=o.slice(0,5).map(t=>`P: ${t.question}
+R: ${l(String(t.answer),600)}`).join(`
+
+`),s=e.fields.map(t=>({key:t.key,pregunta:t.label,tipo:t.kind,obligatoria:t.required,opciones:t.options,respuestas_previas_parecidas:t.hints.length?t.hints:void 0}));return[`## Oferta
+${e.job.title} — ${e.job.company}
+${l(e.job.description,6e3)}`,`## Perfil
+${f(a)}`,`## CV
+${l(a.cvText||"(sin CV cargado)",8e3)}`,n?`## Respuestas abiertas anteriores (solo como referencia de tono)
+${n}`:"",`## Campos a completar
+${JSON.stringify(s,null,2)}`].filter(Boolean).join(`
+
+`)}function g(e){const a=e.indexOf("{"),o=e.lastIndexOf("}");if(a<0||o<a)return[];try{return(JSON.parse(e.slice(a,o+1)).answers??[]).filter(s=>s&&typeof s.key=="string")}catch{return[]}}async function h(e,a,o,n){const s=await fetch("https://api.anthropic.com/v1/messages",{method:"POST",headers:{"content-type":"application/json","x-api-key":e,"anthropic-version":"2023-06-01","anthropic-dangerous-direct-browser-access":"true"},body:JSON.stringify({model:a,max_tokens:2e3,system:o,messages:[{role:"user",content:n}]})});if(!s.ok)throw new Error(`API ${s.status}: ${(await s.text()).slice(0,300)}`);return(await s.json()).content.filter(i=>i.type==="text").map(i=>i.text??"").join("")}chrome.runtime.onMessage.addListener((e,a,o)=>e.type!=="ai.resolve"?!1:((async()=>{const n=await u();if(!n.claudeEnabled||!n.apiKey){o({ok:!1,error:"Claude desactivado o sin API key."});return}const[s,t]=await Promise.all([p(),m()]),i=t.filter(r=>r.reuse==="reference").sort((r,d)=>d.updatedAt-r.updatedAt),c=await h(n.apiKey,n.model,y,$(e.payload,s,i));o({ok:!0,answers:g(c)})})().catch(n=>o({ok:!1,error:String(n)})),!0));chrome.action.onClicked.addListener(()=>chrome.runtime.openOptionsPage());chrome.commands.onCommand.addListener(async e=>{if(e!=="fill-form")return;const[a]=await chrome.tabs.query({active:!0,currentWindow:!0});a!=null&&a.id&&chrome.tabs.sendMessage(a.id,{type:"fill"}).catch(()=>{})});
