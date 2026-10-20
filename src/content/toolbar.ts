@@ -30,7 +30,7 @@ export function createToolbar(onFill: () => void, onClear: () => void): Toolbar 
       .status{color:#9ca3af;font-size:12px;min-height:14px}
     </style>
     <div class="bar">
-      <div class="row"><img src="${chrome.runtime.getURL('icons/icon32.png')}" width="18" height="18" alt="" style="border-radius:3px;background:#fff"><strong>Micro Gambit</strong><span style="color:#9ca3af;font-size:11px">v${chrome.runtime.getManifest().version}</span></div>
+      <div class="row"><img src="${chrome.runtime.getURL('icons/icon32.png')}" width="18" height="18" alt="" style="border-radius:4px"><strong>Apply Assistant</strong><span style="color:#9ca3af;font-size:11px">v${chrome.runtime.getManifest().version}</span></div>
       <div class="row">
         <span class="pill"><span class="dot" style="background:#4ade80"></span><b id="e">0</b> ok</span>
         <span class="pill"><span class="dot" style="background:#e8b600"></span><b id="i">0</b> revisar</span>

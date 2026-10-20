@@ -61,7 +61,7 @@ async function reloadIfNewVersion(): Promise<void> {
     const onDisk = (await res.json()) as { version?: string };
     const running = chrome.runtime.getManifest().version;
     if (onDisk.version && onDisk.version !== running) {
-      console.info(`[Micro Gambit] versión ${running} → ${onDisk.version}: recargando`);
+      console.info(`[Apply Assistant] versión ${running} → ${onDisk.version}: recargando`);
       chrome.runtime.reload();
     }
   } catch {

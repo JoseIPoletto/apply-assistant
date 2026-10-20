@@ -1,8 +1,8 @@
 {
   "manifest_version": 3,
-  "name": "Micro Gambit",
+  "name": "Apply Assistant",
   "description": "Completa formularios de postulación con tu perfil local. Nunca envía: el clic final es tuyo.",
-  "version": "0.4.0",
+  "version": "0.5.0",
   "permissions": [
     "storage",
     "unlimitedStorage",
@@ -44,7 +44,7 @@
   ],
   "options_page": "options.html",
   "action": {
-    "default_title": "Micro Gambit: abrir perfil y ajustes",
+    "default_title": "Apply Assistant: abrir perfil y ajustes",
     "default_icon": {
       "16": "icons/icon16.png",
       "32": "icons/icon32.png",

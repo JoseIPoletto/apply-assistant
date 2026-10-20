@@ -10,7 +10,7 @@ import { applyFill } from './fill';
 import { clearAll, injectStyles, mark, unmark } from './highlight';
 import { createToolbar, type Counts } from './toolbar';
 
-const log = (...a: unknown[]) => console.info('[Micro Gambit]', ...a);
+const log = (...a: unknown[]) => console.info('[Apply Assistant]', ...a);
 
 const adapter = pickAdapter();
 // Con all_frames, no duplicar la barrita en iframes de LinkedIn (ads, etc.).
@@ -163,7 +163,7 @@ async function main() {
       if (!chrome.runtime?.id) {
         // La extensión se actualizó y este script quedó viejo: pedir recarga y no hacer nada más.
         toolbar.show();
-        toolbar.setStatus('Micro Gambit se actualizó: recargá la página (F5).');
+        toolbar.setStatus('Apply Assistant se actualizó: recargá la página (F5).');
         return;
       }
       const roots = site.findRoots();

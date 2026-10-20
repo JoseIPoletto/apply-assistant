@@ -1,4 +1,4 @@
-# Micro Gambit
+# Apply Assistant (personal)
 
 Extensión de Chrome (Manifest V3) que **completa** formularios de postulación en LinkedIn Easy Apply, Greenhouse y Lever con tu perfil local. **Nunca envía**: no hace clic en Siguiente, Revisar ni Enviar. No scrollea, no da likes, no manda mensajes.
 

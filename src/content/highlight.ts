@@ -22,7 +22,7 @@ export function mark(h: FieldHandle, d: Decision) {
   const a = h.anchor;
   if (d.status === 'inferred' || d.status === 'missing') {
     a.setAttribute(ATTR, d.status);
-    a.setAttribute('title', `Micro Gambit: ${d.note}`);
+    a.setAttribute('title', `Apply Assistant: ${d.note}`);
   } else {
     unmark(h);
   }
@@ -31,12 +31,12 @@ export function mark(h: FieldHandle, d: Decision) {
 export function unmark(h: FieldHandle) {
   if (!h.anchor.hasAttribute(ATTR)) return;
   h.anchor.removeAttribute(ATTR);
-  if (h.anchor.getAttribute('title')?.startsWith('Micro Gambit:')) h.anchor.removeAttribute('title');
+  if (h.anchor.getAttribute('title')?.startsWith('Apply Assistant:')) h.anchor.removeAttribute('title');
 }
 
 export function clearAll(root: ParentNode = document) {
   root.querySelectorAll(`[${ATTR}]`).forEach((el) => {
     el.removeAttribute(ATTR);
-    if (el.getAttribute('title')?.startsWith('Micro Gambit:')) el.removeAttribute('title');
+    if (el.getAttribute('title')?.startsWith('Apply Assistant:')) el.removeAttribute('title');
   });
 }
