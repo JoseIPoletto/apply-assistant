@@ -37,7 +37,7 @@ export function App() {
   return (
     <main>
       <header>
-        <h1>Apply Assistant</h1>
+        <h1>Micro Gambit</h1>
         <p className="muted">Todo se guarda en este navegador. La extensión completa, nunca envía.</p>
         <nav>
           {(['perfil', 'tecnologias', 'cv', 'banco', 'ajustes'] as Tab[]).map((t) => (

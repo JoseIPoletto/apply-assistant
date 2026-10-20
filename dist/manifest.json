@@ -1,8 +1,8 @@
 {
   "manifest_version": 3,
-  "name": "Apply Assistant (personal)",
+  "name": "Micro Gambit",
   "description": "Completa formularios de postulación con tu perfil local. Nunca envía: el clic final es tuyo.",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "permissions": [
     "storage",
     "unlimitedStorage",
@@ -44,7 +44,12 @@
   ],
   "options_page": "options.html",
   "action": {
-    "default_title": "Apply Assistant: abrir perfil y ajustes"
+    "default_title": "Micro Gambit: abrir perfil y ajustes",
+    "default_icon": {
+      "16": "icons/icon16.png",
+      "32": "icons/icon32.png",
+      "48": "icons/icon48.png"
+    }
   },
   "commands": {
     "fill-form": {
@@ -54,5 +59,24 @@
       "description": "Completar el paso visible del formulario"
     }
   },
+  "icons": {
+    "16": "icons/icon16.png",
+    "32": "icons/icon32.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "web_accessible_resources": [
+    {
+      "resources": [
+        "icons/*"
+      ],
+      "matches": [
+        "https://www.linkedin.com/*",
+        "https://boards.greenhouse.io/*",
+        "https://job-boards.greenhouse.io/*",
+        "https://jobs.lever.co/*"
+      ]
+    }
+  ],
   "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAyDnR43l+u6Fmscpb0ZVngDyMsmXvMgAgE2BqYgM3b9XNJOQ74G++kEdyR+oRM0Hap0F/IGsPMyfl7AwX1EHsbhwBgs+k/VlMs9KEhw5rz4JSKHE4L7/zYSxvjzXTIQsRd3P1/Ch+Iz/JHM4MebwIkQyJ1wF+qFLve8ZSnNo8FH9EqFDVEYw/1l4RXE8QbOmmlT5rkEZ478axvhqyWhrIyYS4uVPTtS4iCq/7g4bZOYsWiyunxumpFKu3klGUeF+LkptZ2qFWh2CVPK6YXjE8VhqSdHmTtVXiYj/+31fJHhrwNdJMioTAEg+KN6uee0Mvoj+IZnXfpJC3VtUeP0uHtwIDAQAB"
 }
